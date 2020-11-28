@@ -1,0 +1,37 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "Users",
+      "field": "blogs"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Users",
+      "field": "comments"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Users",
+      "field": "followers"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Blogs",
+      "field": "author",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Blogs",
+      "field": "authorId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Comments",
+      "field": "subcomments"
+    }
+  ]
+}

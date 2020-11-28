@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Users{
+    id Int @default(autoincrement()) @id
+    name String 
+    email String @unique
+    followedBy  Users[]   @relation("UserFollows", references: [id])
+    following   Users[]   @relation("UserFollows", references: [id])
+}
+
+model Blogs{
+    id Int @default(autoincrement()) @id
+    title String
+    content String?
+    author Users? @relation(fields: [authorId], references:[id])
+    authorId Int? 
+    createdAt DateTime @default(now())
+}
+
+model Comments{
+    id Int @default(autoincrement()) @id
+    title String
+    blog Blogs @relation(fields: [blogId], references:[id])
+    blogId Int
+    commentor Users @relation(fields: [commentorId], references:[id])
+    commentorId Int
+
+    // parent comment (optional)
+    parent Comments? @relation(fields: [parentId], references:[id])
+    parentId Int?
+}
